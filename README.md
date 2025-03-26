@@ -18,22 +18,25 @@ This project builds a **complete data pipeline** using the Spotify API and AWS s
 - **AWS Glue**
 - **AWS Athena**
 
-## Folder Structure
-```plaintext
-📂 spotify-data-pipeline
- ├── 📂 src
- │   ├── extract.py        # Fetch data from Spotify API
- │   ├── transform.py      # Process and clean data
- │   ├── load.py           # Store data in AWS S3
- │   ├── aws_lambda.py     # AWS Lambda function
- ├── 📂 config
- │   ├── config.json       # API credentials & S3 bucket config
- ├── 📂 data
- │   ├── raw/              # Raw extracted data
- │   ├── processed/        # Transformed data
- ├── requirements.txt      # Python dependencies
- ├── README.md             # Project documentation
-```
+## Project Architecture
+The project follows a structured **Extract, Transform, Load (ETL)** pipeline using AWS services:
+
+1. **Extract Phase:**
+   - The pipeline fetches data from the **Spotify API**.
+   - **AWS Lambda** (triggered by **Amazon CloudWatch**) automates the extraction.
+   - The extracted raw data is stored in an **Amazon S3 bucket**.
+
+2. **Transform Phase:**
+   - A second **AWS Lambda function** processes and transforms the data.
+   - The transformed data is stored in another **S3 bucket**.
+   - A trigger mechanism detects new files and starts the transformation.
+
+3. **Load & Analytics Phase:**
+   - AWS **Glue Crawler** infers schema from the transformed data.
+   - The **AWS Glue Data Catalog** organizes the metadata.
+   - **Amazon Athena** is used to run SQL queries on the processed data for analysis.
+
+![Project Architecture](attachment:Screenshot%202025-03-26%20225307.png)
 
 ## Steps to Implement
 ### 1. **Data Extraction from Spotify API**
@@ -101,11 +104,6 @@ python src/load.py
 - Zip `aws_lambda.py` with dependencies.
 - Deploy to **AWS Lambda**.
 - Configure **EventBridge trigger** for scheduled runs.
-
-## Future Enhancements
-- **CI/CD Pipeline** for automated deployments.
-- **Improved Data Validation** for consistency.
-- **Real-Time Processing** with AWS Kinesis.
 
 ---
 🚀 **Automate Your Data Workflow with AWS & Spotify!**
