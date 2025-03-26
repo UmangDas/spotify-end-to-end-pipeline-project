@@ -36,7 +36,7 @@ The project follows a structured **Extract, Transform, Load (ETL)** pipeline usi
    - The **AWS Glue Data Catalog** organizes the metadata.
    - **Amazon Athena** is used to run SQL queries on the processed data for analysis.
 
-![Project Architecture](attachment:Screenshot%202025-03-26%20225307.png)
+![Project Architecture](https://github.com/UmangDas/spotify-end-to-end-pipeline-project/blob/main/Screenshot%202025-03-26%20225307.png)
 
 ## Steps to Implement
 ### 1. **Data Extraction from Spotify API**
